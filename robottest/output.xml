@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.1 (Python 3.9.1 on win32)" generated="20210501 02:18:22.953" rpa="false" schemaversion="2">
+    <suite id="s1" name="Accounts-Test" source="C:\Users\Z003ZYSN\accounts\robottest\accounts-test.robot">
+        <test id="s1-t1" name="TC_000_Create_Account">
+            <kw name="Create Session" library="RequestsLibrary">
+                <arg>Create_Account</arg>
+                <arg>${Base_URL}</arg>
+                <doc>Create Session: create a HTTP session to a server</doc>
+                <msg timestamp="20210501 02:18:23.200" level="INFO">Creating Session using : alias=Create_Account,
+                    url=http://localhost:8080/v1/user-accounts, headers={}, cookies={}, auth=None, timeout=None,
+                    proxies=None, verify=False, debug=0
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.200" endtime="20210501 02:18:23.200"/>
+            </kw>
+            <kw name="Create Dictionary" library="BuiltIn">
+                <var>&amp;{data}</var>
+                <arg>id=1</arg>
+                <arg>name=Guneykan</arg>
+                <arg>phone=9999999999</arg>
+                <arg>email=test@test.com</arg>
+                <arg>address=Merdivenkoy</arg>
+                <arg>country=TR</arg>
+                <arg>department=IT</arg>
+                <doc>Creates and returns a dictionary based on the given ``items``.</doc>
+                <msg timestamp="20210501 02:18:23.201" level="INFO">&amp;{data} = { id=1 | name=Guneykan |
+                    phone=9999999999 | email=test@test.com | address=Merdivenkoy | country=TR | department=IT }
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.201" endtime="20210501 02:18:23.201"/>
+            </kw>
+            <kw name="Create Dictionary" library="BuiltIn">
+                <var>&amp;{header}</var>
+                <arg>Content-Type=application/json</arg>
+                <doc>Creates and returns a dictionary based on the given ``items``.</doc>
+                <msg timestamp="20210501 02:18:23.202" level="INFO">&amp;{header} = { Content-Type=application/json }
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.202" endtime="20210501 02:18:23.202"/>
+            </kw>
+            <kw name="Post On Session" library="RequestsLibrary">
+                <var>${response}</var>
+                <arg>Create_Account</arg>
+                <arg>/</arg>
+                <arg>json=${data}</arg>
+                <arg>headers=${header}</arg>
+                <doc>Sends a POST request on a previously created HTTP Session.</doc>
+                <msg timestamp="20210501 02:18:23.236" level="INFO">POST Request :
+                    url=http://localhost:8080/v1/user-accounts/
+                    path_url=/v1/user-accounts/
+                    headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept':
+                    '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '143'}
+                    body=b'{"id": "1", "name": "Guneykan", "phone": "9999999999", "email": "test@test.com", "address":
+                    "Merdivenkoy", "country": "TR", "department": "IT"}'
+                </msg>
+                <msg timestamp="20210501 02:18:23.236" level="INFO">POST Response :
+                    url=http://localhost:8080/v1/user-accounts/
+                    status=201, reason=
+                    headers={'Location': 'http://localhost:8080/v1/user-accounts/1', 'Content-Length': '0', 'Date':
+                    'Fri, 30 Apr 2021 23:18:23 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'}
+                    body=None
+                </msg>
+                <msg timestamp="20210501 02:18:23.236" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+                <status status="PASS" starttime="20210501 02:18:23.202" endtime="20210501 02:18:23.237"/>
+            </kw>
+            <kw name="Log To Console" library="BuiltIn">
+                <arg>${response.status_code}</arg>
+                <doc>Logs the given message to the console.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.238" endtime="20210501 02:18:23.239"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${status_code}</var>
+                <arg>${response.status_code}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.240" level="INFO">${status_code} = 201</msg>
+                <status status="PASS" starttime="20210501 02:18:23.239" endtime="20210501 02:18:23.240"/>
+            </kw>
+            <kw name="Should Be Equal" library="BuiltIn">
+                <arg>${status_code}</arg>
+                <arg>${CREATED}</arg>
+                <doc>Fails if the given objects are unequal.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.240" endtime="20210501 02:18:23.240"/>
+            </kw>
+            <status status="PASS" starttime="20210501 02:18:23.199" endtime="20210501 02:18:23.241"/>
+        </test>
+        <test id="s1-t2" name="TC_001_Get_All_Accounts">
+            <kw name="Create Session" library="RequestsLibrary">
+                <arg>Get_All_Accounts</arg>
+                <arg>${Base_URL}</arg>
+                <doc>Create Session: create a HTTP session to a server</doc>
+                <msg timestamp="20210501 02:18:23.243" level="INFO">Creating Session using : alias=Get_All_Accounts,
+                    url=http://localhost:8080/v1/user-accounts, headers={}, cookies={}, auth=None, timeout=None,
+                    proxies=None, verify=False, debug=0
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.243" endtime="20210501 02:18:23.243"/>
+            </kw>
+            <kw name="Get On Session" library="RequestsLibrary">
+                <var>${response}</var>
+                <arg>Get_All_Accounts</arg>
+                <arg>/all</arg>
+                <doc>Sends a GET request on a previously created HTTP Session.</doc>
+                <msg timestamp="20210501 02:18:23.255" level="INFO">GET Request :
+                    url=http://localhost:8080/v1/user-accounts/all
+                    path_url=/v1/user-accounts/all
+                    headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept':
+                    '*/*', 'Connection': 'keep-alive'}
+                    body=None
+                </msg>
+                <msg timestamp="20210501 02:18:23.255" level="INFO">GET Response :
+                    url=http://localhost:8080/v1/user-accounts/all
+                    status=200, reason=
+                    headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Fri, 30 Apr
+                    2021 23:18:23 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'}
+                    body=[{"name":"Guneykan","phone":"9999999999","email":"test@test.com","address":"Merdivenkoy","country":"TR","department":"IT","links":[],"id":1},{"name":"Guneykan44444444444444","phone":"5349944995","email":"guneykan.ince@gmail.com","address":"Merdivenkoy","country":"Turkey","department":"ATM","links":[],"id":223}]
+                </msg>
+                <msg timestamp="20210501 02:18:23.255" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+                <status status="PASS" starttime="20210501 02:18:23.243" endtime="20210501 02:18:23.255"/>
+            </kw>
+            <kw name="Log To Console" library="BuiltIn">
+                <arg>${response.status_code}</arg>
+                <doc>Logs the given message to the console.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.256" endtime="20210501 02:18:23.257"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${status_code}</var>
+                <arg>${response.status_code}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.259" level="INFO">${status_code} = 200</msg>
+                <status status="PASS" starttime="20210501 02:18:23.258" endtime="20210501 02:18:23.259"/>
+            </kw>
+            <kw name="Should Be Equal" library="BuiltIn">
+                <arg>${status_code}</arg>
+                <arg>${SUCCESS}</arg>
+                <doc>Fails if the given objects are unequal.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.259" endtime="20210501 02:18:23.260"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${body}</var>
+                <arg>${response.content}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.261" level="INFO">${body} =
+                    [{"name":"Guneykan","phone":"9999999999","email":"test@test.com","address":"Merdivenkoy","country":"TR","department":"IT","links":[],"id":1},{"name":"Guneykan44444444444444","phone":"5349944995","emai...
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.260" endtime="20210501 02:18:23.261"/>
+            </kw>
+            <kw name="Should Contain" library="BuiltIn">
+                <arg>${body}</arg>
+                <arg>name</arg>
+                <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.261" endtime="20210501 02:18:23.261"/>
+            </kw>
+            <status status="PASS" starttime="20210501 02:18:23.242" endtime="20210501 02:18:23.262"/>
+        </test>
+        <test id="s1-t3" name="TC_002_Find_Account_ById">
+            <kw name="Create Session" library="RequestsLibrary">
+                <arg>Find_Account_ById</arg>
+                <arg>${Base_URL}</arg>
+                <doc>Create Session: create a HTTP session to a server</doc>
+                <msg timestamp="20210501 02:18:23.264" level="INFO">Creating Session using : alias=Find_Account_ById,
+                    url=http://localhost:8080/v1/user-accounts, headers={}, cookies={}, auth=None, timeout=None,
+                    proxies=None, verify=False, debug=0
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.264" endtime="20210501 02:18:23.265"/>
+            </kw>
+            <kw name="Get On Session" library="RequestsLibrary">
+                <var>${response}</var>
+                <arg>Find_Account_ById</arg>
+                <arg>/1</arg>
+                <doc>Sends a GET request on a previously created HTTP Session.</doc>
+                <msg timestamp="20210501 02:18:23.278" level="INFO">GET Request :
+                    url=http://localhost:8080/v1/user-accounts/1
+                    path_url=/v1/user-accounts/1
+                    headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept':
+                    '*/*', 'Connection': 'keep-alive'}
+                    body=None
+                </msg>
+                <msg timestamp="20210501 02:18:23.278" level="INFO">GET Response :
+                    url=http://localhost:8080/v1/user-accounts/1
+                    status=200, reason=
+                    headers={'Content-Type': 'application/hal+json', 'Transfer-Encoding': 'chunked', 'Date': 'Fri, 30
+                    Apr 2021 23:18:23 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'}
+                    body={"name":"Guneykan","phone":"9999999999","email":"test@test.com","address":"Merdivenkoy","country":"TR","department":"IT","id":1}
+                </msg>
+                <msg timestamp="20210501 02:18:23.278" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+                <status status="PASS" starttime="20210501 02:18:23.265" endtime="20210501 02:18:23.278"/>
+            </kw>
+            <kw name="Log To Console" library="BuiltIn">
+                <arg>${response.status_code}</arg>
+                <doc>Logs the given message to the console.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.279" endtime="20210501 02:18:23.281"/>
+</kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${status_code}</var>
+                <arg>${response.status_code}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.285" level="INFO">${status_code} = 200</msg>
+                <status status="PASS" starttime="20210501 02:18:23.284" endtime="20210501 02:18:23.286"/>
+            </kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${SUCCESS}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+    <status status="PASS" starttime="20210501 02:18:23.286" endtime="20210501 02:18:23.287"/>
+</kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${body}</var>
+                <arg>${response.content}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.288" level="INFO">${body} =
+                    {"name":"Guneykan","phone":"9999999999","email":"test@test.com","address":"Merdivenkoy","country":"TR","department":"IT","id":1}
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.287" endtime="20210501 02:18:23.288"/>
+            </kw>
+            <kw name="Should Contain" library="BuiltIn">
+                <arg>${body}</arg>
+                <arg>name</arg>
+                <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.289" endtime="20210501 02:18:23.289"/>
+            </kw>
+            <status status="PASS" starttime="20210501 02:18:23.263" endtime="20210501 02:18:23.289"/>
+        </test>
+        <test id="s1-t4" name="TC_003_Update_Account">
+            <kw name="Create Session" library="RequestsLibrary">
+                <arg>Create_Account</arg>
+                <arg>${Base_URL}</arg>
+                <doc>Create Session: create a HTTP session to a server</doc>
+                <msg timestamp="20210501 02:18:23.292" level="INFO">Creating Session using : alias=Create_Account,
+                    url=http://localhost:8080/v1/user-accounts, headers={}, cookies={}, auth=None, timeout=None,
+                    proxies=None, verify=False, debug=0
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.292" endtime="20210501 02:18:23.292"/>
+            </kw>
+            <kw name="Create Dictionary" library="BuiltIn">
+                <var>&amp;{data}</var>
+                <arg>id=1</arg>
+                <arg>name=Guneykan3</arg>
+                <arg>phone=999993399999</arg>
+                <arg>email=test@test.com</arg>
+                <arg>address=Merdivenkoy</arg>
+                <arg>country=TR</arg>
+                <arg>department=IT</arg>
+                <doc>Creates and returns a dictionary based on the given ``items``.</doc>
+                <msg timestamp="20210501 02:18:23.293" level="INFO">&amp;{data} = { id=1 | name=Guneykan3 |
+                    phone=999993399999 | email=test@test.com | address=Merdivenkoy | country=TR | department=IT }
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.293" endtime="20210501 02:18:23.293"/>
+            </kw>
+            <kw name="Create Dictionary" library="BuiltIn">
+                <var>&amp;{header}</var>
+                <arg>Content-Type=application/json</arg>
+                <doc>Creates and returns a dictionary based on the given ``items``.</doc>
+                <msg timestamp="20210501 02:18:23.294" level="INFO">&amp;{header} = { Content-Type=application/json }
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.294" endtime="20210501 02:18:23.294"/>
+            </kw>
+            <kw name="Put On Session" library="RequestsLibrary">
+                <var>${response}</var>
+                <arg>Create_Account</arg>
+                <arg>/</arg>
+                <arg>json=${data}</arg>
+                <arg>headers=${header}</arg>
+                <doc>Sends a PUT request on a previously created HTTP Session.</doc>
+                <msg timestamp="20210501 02:18:23.308" level="INFO">PUT Request :
+                    url=http://localhost:8080/v1/user-accounts/
+                    path_url=/v1/user-accounts/
+                    headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept':
+                    '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '146'}
+                    body=b'{"id": "1", "name": "Guneykan3", "phone": "999993399999", "email": "test@test.com",
+                    "address": "Merdivenkoy", "country": "TR", "department": "IT"}'
+                </msg>
+                <msg timestamp="20210501 02:18:23.309" level="INFO">PUT Response :
+                    url=http://localhost:8080/v1/user-accounts/
+                    status=201, reason=
+                    headers={'Location': 'http://localhost:8080/v1/user-accounts/1', 'Content-Length': '0', 'Date':
+                    'Fri, 30 Apr 2021 23:18:23 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'}
+                    body=None
+                </msg>
+                <msg timestamp="20210501 02:18:23.309" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+                <status status="PASS" starttime="20210501 02:18:23.294" endtime="20210501 02:18:23.309"/>
+            </kw>
+            <kw name="Log To Console" library="BuiltIn">
+                <arg>${response.status_code}</arg>
+                <doc>Logs the given message to the console.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.310" endtime="20210501 02:18:23.311"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${status_code}</var>
+                <arg>${response.status_code}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.312" level="INFO">${status_code} = 201</msg>
+                <status status="PASS" starttime="20210501 02:18:23.311" endtime="20210501 02:18:23.312"/>
+            </kw>
+            <kw name="Should Be Equal" library="BuiltIn">
+                <arg>${status_code}</arg>
+                <arg>${CREATED}</arg>
+                <doc>Fails if the given objects are unequal.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.312" endtime="20210501 02:18:23.312"/>
+            </kw>
+            <status status="PASS" starttime="20210501 02:18:23.290" endtime="20210501 02:18:23.313"/>
+        </test>
+        <test id="s1-t5" name="TC_005_Delete_Account">
+            <kw name="Create Session" library="RequestsLibrary">
+                <arg>Delete_Account</arg>
+                <arg>${Base_URL}</arg>
+                <doc>Create Session: create a HTTP session to a server</doc>
+                <msg timestamp="20210501 02:18:23.315" level="INFO">Creating Session using : alias=Delete_Account,
+                    url=http://localhost:8080/v1/user-accounts, headers={}, cookies={}, auth=None, timeout=None,
+                    proxies=None, verify=False, debug=0
+                </msg>
+                <status status="PASS" starttime="20210501 02:18:23.315" endtime="20210501 02:18:23.315"/>
+            </kw>
+            <kw name="Delete On Session" library="RequestsLibrary">
+                <var>${response}</var>
+                <arg>Delete_Account</arg>
+                <arg>/1</arg>
+                <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+                <msg timestamp="20210501 02:18:23.335" level="INFO">DELETE Request :
+                    url=http://localhost:8080/v1/user-accounts/1
+                    path_url=/v1/user-accounts/1
+                    headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept':
+                    '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'}
+                    body=None
+                </msg>
+                <msg timestamp="20210501 02:18:23.335" level="INFO">DELETE Response :
+                    url=http://localhost:8080/v1/user-accounts/1
+                    status=200, reason=
+                    headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Fri, 30 Apr
+                    2021 23:18:23 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'}
+                    body={"message":"delete success"}
+                </msg>
+                <msg timestamp="20210501 02:18:23.336" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+                <status status="PASS" starttime="20210501 02:18:23.316" endtime="20210501 02:18:23.336"/>
+            </kw>
+            <kw name="Log To Console" library="BuiltIn">
+                <arg>${response.status_code}</arg>
+                <doc>Logs the given message to the console.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.336" endtime="20210501 02:18:23.337"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${status_code}</var>
+                <arg>${response.status_code}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.338" level="INFO">${status_code} = 200</msg>
+                <status status="PASS" starttime="20210501 02:18:23.338" endtime="20210501 02:18:23.338"/>
+            </kw>
+            <kw name="Should Be Equal" library="BuiltIn">
+                <arg>${status_code}</arg>
+                <arg>${SUCCESS}</arg>
+                <doc>Fails if the given objects are unequal.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.339" endtime="20210501 02:18:23.339"/>
+            </kw>
+            <kw name="Convert To String" library="BuiltIn">
+                <var>${body}</var>
+                <arg>${response.content}</arg>
+                <doc>Converts the given item to a Unicode string.</doc>
+                <msg timestamp="20210501 02:18:23.340" level="INFO">${body} = {"message":"delete success"}</msg>
+                <status status="PASS" starttime="20210501 02:18:23.339" endtime="20210501 02:18:23.341"/>
+            </kw>
+            <kw name="Should Contain" library="BuiltIn">
+                <arg>${body}</arg>
+                <arg>message</arg>
+                <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+                <status status="PASS" starttime="20210501 02:18:23.341" endtime="20210501 02:18:23.341"/>
+            </kw>
+            <status status="PASS" starttime="20210501 02:18:23.315" endtime="20210501 02:18:23.341"/>
+        </test>
+        <doc>User Accounts RestApi Test With Robot Framework</doc>
+        <status status="PASS" starttime="20210501 02:18:22.958" endtime="20210501 02:18:23.344"/>
+    </suite>
+<statistics>
+<total>
+    <stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+    <stat pass="5" fail="0" skip="0" id="s1" name="Accounts-Test">Accounts-Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
