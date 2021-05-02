@@ -2,6 +2,6 @@
 
 set -e
 
-IMAGE_NAME="app/useraccounts"
+IMAGE_NAME="guneykanince/useraccountapi"
 
 docker build --tag "$IMAGE_NAME" .
