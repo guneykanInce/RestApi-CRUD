@@ -22,6 +22,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
+    - name: Permission
+      run: |
+          chmod 777 ${{ github.workspace }}/reports
+      
     - name: Robot Framework Tests
       uses: joonvena/robotframework-docker-action@v0.1
       env:
