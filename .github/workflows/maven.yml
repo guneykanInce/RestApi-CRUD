@@ -21,25 +21,3 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-      
-    - name: Run App with Maven
-      run: mvn spring-boot:run
-    - name: Create reports folder
-      run: |
-          mkdir ${{ github.workspace }}/reports
-      
-    - name: Permission
-      run: |
-          chmod 777 ${{ github.workspace }}/reports
-      
-    - name: Robot Framework Tests
-      uses: joonvena/robotframework-docker-action@v0.1
-      env:
-        ROBOT_TESTS_DIR: ${{ github.workspace }}/robottest/
-        ROBOT_REPORTS_DIR: ${{ github.workspace }}/reports/
-    - name: Upload test results
-      uses: actions/upload-artifact@v1
-      if: always()
-      with:
-          name: reports
-          path: ${{ github.workspace }}/reports/
