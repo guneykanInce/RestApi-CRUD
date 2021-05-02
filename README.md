@@ -12,6 +12,7 @@ CRUD operations with RestApi services and RobotFramework for BDD, JUNIT5 for uni
 * [H2 Database](https://www.h2database.com/html/main.html)
 * [Junit5](https://junit.org/junit5/)
 * [Robot Framework](https://robotframework.org/)
+* [Docker](https://hub.docker.com/)
 
 ## Setup 
 
@@ -33,4 +34,12 @@ mvn spring-boot:run
 ```
 Go http://localhost:8080/
 
+## Run with Docker
 
+```bash
+docker pull guneykanince/useraccountapi:latest
+```
+
+```bash
+docker run -p 8080:8080 -t guneykanince/useraccountapi:latest
+```
